@@ -11,12 +11,16 @@
         <div class="card-header text-success my-3">
             <h3>written by: {{ $post->user->name }}</h3>
         </div>
+        <div class="text-center">
+            <img src="{{ asset('images/posts/' . $post->image) }}" alt="post_image" class="w-50">
+        </div>
         <div class="my-2">
             <div class="card-header" style="background-color: #1fcc84;">
                 <h3>{{ $post->title }}</h3>
             </div>
             <div class="card-body" style="background-color: #97ddf5; text-color:yellow">{{ $post->body }}</div>
         </div>
+
         <div class="text-dark">
             <h4>Comments</h4>
 

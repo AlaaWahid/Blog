@@ -37,9 +37,9 @@
                     </div>
                     <div class="form-group">
                         <label for="role">Role: </label>
-                        <select class="form-control" name="Role">
-                            <option value="Admin">Admin</option>
+                        <select class="form-control" name="role">
                             <option value="User">User</option>
+                            <option value="Admin">Admin</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add User</button>

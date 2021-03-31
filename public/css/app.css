@@ -10941,4 +10941,7 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
-
+.post-img{
+    width: 150px;
+    height: 100px;
+}

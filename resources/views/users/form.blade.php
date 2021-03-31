@@ -14,7 +14,7 @@
                 </div>
                 <br />
             @endif
-            <form method="post" action="{{ route('users.update', $user->id) }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('users.update', $user->id) }}">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
@@ -33,11 +33,10 @@
                 <div class="form-group">
                     <label for="role">Role: </label>
                     <select class="form-control" name="role">
-                        <option value="Admin">Admin</option>
                         <option value="User">User</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>

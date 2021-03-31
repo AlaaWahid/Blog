@@ -41,12 +41,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $user_id = Auth::id();
         $post = new Post;
         $post->user_id = $user_id;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/posts/', $filename);
+            $post->image = $filename;
+        }
+
         $post->save();
         return redirect(route('posts.index'))->with('success', 'Post saved');
     }
@@ -59,6 +67,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+
         return view('posts.show')
             ->with('post', $post)
             ->with('user', User::all())
@@ -85,13 +94,26 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        $post->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'user_id' => $request->user
-        ]);
+        // $post->update([
+        //     'title' => $request->title,
+        //     'body' => $request->body,
+        //     'user_id' => $request->user
+        // ]);
+        $post = Post::findOrFail($id);
+        $user_id = Auth::id();
+        $post->user_id = $user_id;
+        $post->title =  $request->input('title');
+        $post->body = $request->input('body');
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/posts/', $filename);
+            $post->image = $filename;
+        }
+        $post->save();
         return redirect(route('posts.index'))->with('success', 'Post updated');
     }
 

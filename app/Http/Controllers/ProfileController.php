@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 use App\User;
-use App\Post;
-
 
 class ProfileController extends Controller
 {
@@ -38,9 +35,20 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        $user = new User;
+        $user->name =  $request->get('name');
+        $user->email = $request->get('email');
+        $user->address = $request->get('address');
+        $user->role = $request->get('role');
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/users/', $filename);
+            $user->image = $filename;
+        }
     }
 
     /**
@@ -79,8 +87,15 @@ class ProfileController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->address = $request->get('address');
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images/users/', $filename);
+            $user->image = $filename;
+        }
         $user->save();
-        return redirect('/profile');
+        return redirect('/profile')->with('success', 'Profile updated!');
     }
 
     /**
@@ -91,6 +106,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/')->with('success', 'User deleted!');
     }
 }

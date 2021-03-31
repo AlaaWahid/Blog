@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #40e48f;">
+        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #40e48f;font-size: 20px;">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,13 +35,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active ml-5 mr-4" style="color:rgb(9, 91, 243)" aria-current=" page"
+                            <a class="nav-link active ml-5 mr-4" style="color:rgb(64, 126, 240)" aria-current=" page"
                                 href="/home">Home</a>
                         </li>
                         @auth
                             @if (Auth::user()->role == 'Admin')
                                 <li class="nav-item">
-                                    <a class="nav-link active mr-4" style="color:rgb(9, 91, 243)" aria-current="page"
+                                    <a class="nav-link active mr-4" style="color:rgb(64, 126, 240)" aria-current="page"
                                         href="{{ url('/users') }}">All
                                         Users</a>
                                 </li>
@@ -49,16 +49,16 @@
                         @endauth
 
                         <li class="nav-item">
-                            <a class="nav-link active mr-4" style="color:rgb(9, 91, 243)" aria-current="page"
+                            <a class="nav-link active mr-4" style="color:rgb(64, 126, 240)" aria-current="page"
                                 href="{{ url('/profile') }}">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active mr-4" style="color:rgb(9, 91, 243)" aria-current="page"
+                            <a class="nav-link active mr-4" style="color:rgb(64, 126, 240)" aria-current="page"
                                 href="{{ route('posts.create') }}">New
                                 Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active mr-4" style="color:rgb(9, 91, 243)" aria-current="page"
+                            <a class="nav-link active mr-4" style="color:rgb(64, 126, 240)" aria-current="page"
                                 href="{{ route('posts.index') }}">
                                 All Posts</a>
                         </li>
@@ -88,7 +88,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -102,14 +102,9 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            <div class='row'>
-                <div class="col-md-9">
-                    @yield('content')
-                </div>
-            </div>
-        </main>
+        <div class="col">
+            @yield('content')
+        </div>
     </div>
     <footer class="py-3 my-5 badge-success" style="border-radius:20px">
         <div>

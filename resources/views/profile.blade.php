@@ -7,6 +7,9 @@
                     <h3>Profile<h3>
                 </div>
                 <div class="text-center">
+                    <img src="{{ asset('images/users/' . $user->image) }}" alt="image" class="w-50">
+                </div>
+                <div class="text-center">
                     <h2><b>Name: </b> {{ $user->name }}</h2>
                     <br>
                     <h2><b>Email: </b> {{ $user->email }}</h2>
@@ -18,8 +21,15 @@
                     <h2><b>Role: </b> {{ $user->role }}</h2>
                     <br>
                 </div>
-                <div class="text-center">
-                    <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-success">Update</a>
+                <div class="d-line">
+                    <div class="float-left">
+                        <a href="{{ route('profile.edit', $user->id) }}" class="btn btn-success">Update</a>
+                    </div>
+                    <form action="{{ route('profile.destroy', $user->id) }}" method="POST" class="float-right">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>

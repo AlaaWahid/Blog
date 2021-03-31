@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="ml-5">
+    <div class="col-md-9 ml-5">
         <div class="col-sm-12">
             @if (session()->get('success'))
                 <div class="alert alert-success">
@@ -9,12 +9,13 @@
             @endif
         </div>
 
-        <form action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
+        <form enctype="multipart/form-data"
+            action="{{ isset($post) ? route('posts.update', $post->id) : route('posts.store') }}" method="POST">
             @csrf
             @if (isset($post))
                 @method('PUT')
             @endif
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label>Post title</label>
                 <input id="title" name="title" type="text" class="form-control"
                     value="{{ isset($post) ? $post->title : '' }}">
@@ -30,7 +31,11 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <input type="file" id="image" name="image" class="form-control" accept="image/x-png,image/gif,image/jpeg"
+                    value="{{ isset($post) ? $post->image : '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary my-3">Submit</button>
         </form>
 
     </div>
